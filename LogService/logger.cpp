@@ -1,5 +1,7 @@
 #include <string>
+#include <memory>
 #include "logger.h"
+#include "boost_logger.h"
 
 
 std::string rr::log::to_string(rr::log::severity_level level) {
@@ -28,34 +30,17 @@ std::string rr::log::to_string(rr::log::severity_level level) {
 	}
 }
 
-// Constructor
-rr::logger::logger(const std::string& module) : _module{ module } {
+rr::log::logger::logger(const std::string& module) : _module{ module } {
 }
 
-// Private implementation
-// Function to send a log to _lg.
-void rr::logger::send_log(rr::log::severity_level level, std::string module, std::string msg) {
-
-	using namespace boost::log;
-
-	record rec = _lg.open_record();
-	if (rec)
-	{
-		record_ostream strm(rec);
-		strm << '[' << rr::log::to_string(level) << "] ";
-		strm << '[' << module << "] ";
-		strm << msg;
-		strm.flush();
-		_lg.push_record(boost::move(rec));
-	}
-}
-
-// public
-void rr::logger::debug(const std::string& msg) {
+void rr::log::logger::debug(const std::string& msg) {
 	send_log(rr::log::severity_level::debug, _module, msg);
 }
 
-//public
-void rr::logger::info(const std::string& msg) {
+void rr::log::logger::info(const std::string& msg) {
 	send_log(rr::log::severity_level::info, _module, msg);
+}
+
+std::unique_ptr<rr::log::logger> rr::log::get_logger(const std::string& module) {
+	return std::make_unique<rr::log::boost_logger>(module);
 }

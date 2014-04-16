@@ -66,9 +66,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="boost_logger.h" />
     <ClInclude Include="logger.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="boost_logger.cpp" />
     <ClCompile Include="logger.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

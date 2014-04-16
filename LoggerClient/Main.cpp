@@ -1,11 +1,10 @@
 #include "../LogService/logger.h"
-#include <iostream>
 
 int main(int argc, char* argv[]) {
-	rr::logger lg{ "TestProg" };
+	auto lg = rr::log::get_logger("TestProg");
 
-	lg.info("This is an info message.");
-	lg.debug("This is a debug message.");
+	lg->info("This is an info message.");
+	lg->debug("This is a debug message.");
 
 	system("pause");
 	return 0;
