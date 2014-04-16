@@ -7,6 +7,7 @@
 #include <memory>
 #include <string>
 #include <boost/log/trivial.hpp>
+#include <boost/log/sources/severity_logger.hpp>
 
 namespace rr {
 
@@ -29,6 +30,12 @@ namespace rr {
 	/* Create a static member variable in your class to hold an instance of this class,
 	 * supplying the name of your class to the constructor. Then, use that object to log 
 	 * debug and informational messages to the core.
+	 *
+	 * Note that the current implementation is not thread safe - meaning two threads can use
+	 * the same logger instance at the same time. However, each thread can have its own
+	 * logger instance, and they can both be used simultaneously from different threads. This
+	 * is preferred anyway, because each logger can identify the source thread of the 
+	 * log message which might help when it comes to debug time.
 	 */
 	class logger {
 

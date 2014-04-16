@@ -23,7 +23,7 @@ std::string rr::log::to_string(rr::log::severity_level level) {
 		return "Warning";
 		break;
 	default:
-		return std::string{ 0, 0 }; // Stores a null instead of a string, basically let's fail silently.
+		return "Unknown";
 		break;
 	}
 }
