@@ -43,8 +43,12 @@ namespace rr {
 
 			std::string module() { return _module; };		// Gets the name of the module associated with this logger.
 
-			virtual void info(const std::string& msg);		// Log a message with info severity level.
+			virtual void trace(const std::string& msg);		// Log a message with trace severity level.
 			virtual void debug(const std::string& msg);		// Log a message with debug severity level.
+			virtual void info(const std::string& msg);		// Log a message with info severity level.
+			virtual void warning(const std::string& msg);	// Log a message with warning severity level.
+			virtual void error(const std::string& msg);		// Log a message with error severity level.
+			virtual void fatal(const std::string& msg);		// Log a message with fatal severity level.
 
 		protected:
 			virtual void send_log(rr::log::severity_level level, std::string module, std::string msg) = 0;  // Sub-classes implement this to actually log a message.
