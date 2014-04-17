@@ -11,6 +11,9 @@ namespace rr {
 
 	namespace log {
 
+		// Ensure this function is called before using any part of the logging library.
+		void init_logging();
+
 		enum severity_level
 		{
 			trace,

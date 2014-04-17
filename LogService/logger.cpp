@@ -3,6 +3,14 @@
 #include "logger.h"
 #include "boost_logger.h"
 
+void rr::log::init_logging() {
+	// Make sure we pass the initialization on to the implementation to give it a chance to initialize itself.
+	rr::log::boost_imp::init_logging();
+}
+
+std::unique_ptr<rr::log::logger> rr::log::get_logger(const std::string& module) {
+	return std::make_unique<rr::log::boost_imp::boost_logger>(module);
+}
 
 std::string rr::log::to_string(rr::log::severity_level level) {
 	switch (level) {
@@ -55,8 +63,4 @@ void rr::log::logger::error(const std::string& msg) {
 
 void rr::log::logger::fatal(const std::string& msg) {
 	send_log(rr::log::severity_level::fatal, _module, msg);
-}
-
-std::unique_ptr<rr::log::logger> rr::log::get_logger(const std::string& module) {
-	return std::make_unique<rr::log::boost_logger>(module);
 }

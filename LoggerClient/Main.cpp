@@ -1,6 +1,8 @@
 #include "../LogService/logger.h"
 
 int main(int argc, char* argv[]) {
+	rr::log::init_logging();
+
 	auto lg = rr::log::get_logger("TestProg");
 
 	lg->trace("This is a trace message.");
