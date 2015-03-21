@@ -1,5 +1,4 @@
-#ifndef __LOGGER_H__
-#define __LOGGER_H__
+#pragma once
 
 // The following line indicates that the object file will need to have LogService.lib linked with it.
 #pragma comment (lib, "LogService")
@@ -39,7 +38,9 @@ namespace rr {
 		 */
 		class logger {
 		public:
+
 			logger(const std::string& module);				// module is the tag for the log message.
+			virtual ~logger() {}
 
 			logger(const logger&) = delete;					// No copy constructor.
 			bool operator=(const logger&) = delete;			// No assignment.
@@ -54,7 +55,7 @@ namespace rr {
 			virtual void fatal(const std::string& msg);		// Log a message with fatal severity level.
 
 		protected:
-			virtual void send_log(rr::log::severity_level level, std::string module, std::string msg) = 0;  // Sub-classes implement this to actually log a message.
+			virtual void send_log(severity_level level, std::string module, std::string msg) = 0;  // Sub-classes implement this to actually log a message.
 
 		private:
 			std::string _module;							// The source module using the logger.
@@ -66,5 +67,3 @@ namespace rr {
 	}
 
 }
-
-#endif

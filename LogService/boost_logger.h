@@ -1,5 +1,4 @@
-#ifndef __BOOST_LOGGER_H__
-#define __BOOST_LOGGER_H__
+#pragma
 
 #include <string>
 #include <boost/log/trivial.hpp>
@@ -20,10 +19,12 @@ namespace rr {
 				boost_logger(const std::string& module);
 
 			protected:
-				void send_log(rr::log::severity_level level, std::string module, std::string msg);	// Logs a message with _lg.
+				// Logs a message with _lg.
+				void send_log(rr::log::severity_level level, std::string module, std::string msg);
 
 			private:
-				boost::log::sources::severity_logger<rr::log::severity_level> _lg;					// This is Boost.Log's logger we're going to send our log records to.
+				// This is Boost.Log's logger we're going to send our log records to.
+				boost::log::sources::severity_logger<rr::log::severity_level> _lg;
 			};
 
 		}
@@ -31,5 +32,3 @@ namespace rr {
 	}
 
 }
-
-#endif
